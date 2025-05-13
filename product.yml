@@ -14,7 +14,7 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-        - image: "$(AZURE_CONTAINER_REGISTRY}.azurecr.io/productservice:v1"
+        - image: "$(AZURE_CONTAINER_REGISTRY).azurecr.io/productservice:v1"
           name: productservice
           volumeMounts:
           - mountPath: "/db"
