@@ -14,8 +14,14 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-        - image: [replace with your ACR name].azurecr.io/productservice:latest
+        - image: "{{AZURE_CONTAINER_REGISTRY}}.azurecr.io/productservice:v1"
           name: productservice
+          volumeMounts:
+          - mountPath: "/db"
+            name: db-storage
+          env:
+          - name: ConnectionStrings__ProductsContext
+            value: "Data Source=/db/Database.db"
           resources:
             requests:
               cpu: 100m
@@ -26,3 +32,6 @@ spec:
           ports:
             - containerPort: 8080
               name: http
+      volumes:
+      - name: db-storage
+        emptyDir: {}
